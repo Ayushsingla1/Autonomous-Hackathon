@@ -39,7 +39,7 @@ class DBPedia extends Component {
 
     axios
       .post(
-        'http://localhost:8001/chatbot',
+        'https://autonomous-backend.onrender.com',
         {
           message: search,
           conversation: updatedHistory, 
