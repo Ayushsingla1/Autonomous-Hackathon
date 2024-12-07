@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ChatBot, { Loading } from 'react-simple-chatbot';
-
+import ReactMarkdown from 'react-markdown';
 
 class DBPedia extends Component {
   constructor(props : any) {
@@ -39,7 +39,7 @@ class DBPedia extends Component {
 
     axios
       .post(
-        'https://autonomous-backend.onrender.com',
+        'https://autonomous-backend.onrender.com/chatbot',
         {
           message: search,
           conversation: updatedHistory, 
@@ -79,7 +79,7 @@ class DBPedia extends Component {
   render() {
     const { loading , result } = this.state;
 
-    return <div className="dbpedia">{loading ? <Loading /> : result}</div>;
+    return <div className="dbpedia">{loading ? <Loading /> : <ReactMarkdown>{result}</ReactMarkdown>}</div>;
   }
 }
 
@@ -121,11 +121,6 @@ const App = () => {
         id: '3',
         component: <DBPedia />,
         waitAction: true,
-        trigger: '4',
-      },
-      {
-        id: '4',
-        message: 'Would you like to ask another question?',
         trigger: 'search',
       },
     ]}
